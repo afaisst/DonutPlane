@@ -1,0 +1,88 @@
+// By Andreas Faisst, December 2021
+// Graphics from: https://www.gamedeveloperstudio.com/
+
+let dragforce = 0.1;
+
+// PLANE -----------
+class Player {
+    constructor(){
+        this.xstart = canvas.width*0.05;
+        this.ystart = canvas.height*0.15; // change later?
+        this.radius = 20;
+        this.vxdrag = -4;
+        this.vx = this.vxdrag;
+        this.ax = 0.1;
+        this.x = this.xstart;
+        this.y = this.ystart;
+        //this.vxatdrop = this.vxstart;
+
+    }
+    update(){
+        this.x = this.x + this.vx;
+        
+        if (this.x < this.xstart){
+            this.x = this.xstart;
+
+        }
+        if (this.x > canvas.width*0.95){
+            this.x = canvas.width*0.95;
+            this.vx = this.vxdrag;
+        }
+
+        if (player_acc){
+            player.acc();
+        } else {
+            player.dec();
+        }
+
+    }
+    acc(){
+        this.vx = this.vx + this.ax;
+    }
+    dec(){
+        this.vx = this.vx - 2*this.ax;
+        if (this.vx < this.vxdrag) this.vx = this.vxdrag
+    }
+    drop(){
+        /*const package = new Package();
+        package.x = player.x;
+        package.y = player.y;
+        package.vx = player.vx;*/
+        console.log("drop");
+    }
+
+    draw(){
+        ctx.fillStyle = 'red';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius , 0 , Math.PI * 2 , true);
+        ctx.fill();
+        ctx.closePath();
+    }
+}
+const player = new Player();
+
+
+// PACKAGES ------------
+//const packageArray = [];
+class Package {
+    constructor(){
+        this.x = player.x;
+        this.y = player.y;
+        this.vxdrag = player.vxdrag;
+        this.vx = player.vx;
+        this.vy = 5;
+        this.radius = 10;
+
+    }
+    update(){
+        this.x = this.x + this.vxdrag + this.vx;
+        this.y = this.y + this.vy;
+    }
+    draw(){
+        ctx.fillStyle = 'blue';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.radius , 0 , Math.PI * 2 , true);
+        ctx.fill();
+        ctx.closePath();
+    }
+}

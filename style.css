@@ -1,0 +1,27 @@
+* {
+    margin: 5px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background: white;
+    overflow: hidden; /* Hide scrollbars */
+}
+
+#canvas1 {
+    width: 1000px;
+    height: 500px;
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50% , -10%);
+    border: 2px solid black;
+    background-image: url("./graphics/sky_color.png");
+    background-size: 1000px 500px;
+    cursor: crosshair;
+}
